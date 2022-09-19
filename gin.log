@@ -1,0 +1,11 @@
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /register                 --> golang-user-service/src/account/controllers.(*UserController).addUser-fm (2 handlers)
+[GIN-debug] POST   /login                    --> golang-user-service/src/account/controllers.(*UserController).signIn-fm (2 handlers)
+[GIN-debug] GET    /users                    --> golang-user-service/src/account/controllers.(*UserController).getById-fm (3 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :3302
+::1 - [Tue, 20 Sep 2022 06:40:06 +07] "GET /users HTTP/1.1 200 7.3301679s "PostmanRuntime/7.29.2" "
