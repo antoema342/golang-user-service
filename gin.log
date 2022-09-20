@@ -8,4 +8,4 @@
 [GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
 Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
 [GIN-debug] Listening and serving HTTP on :3302
-::1 - [Tue, 20 Sep 2022 06:40:06 +07] "GET /users HTTP/1.1 200 7.3301679s "PostmanRuntime/7.29.2" "
+::1 - [Tue, 20 Sep 2022 07:01:01 +07] "GET /users HTTP/1.1 200 120.1635ms "PostmanRuntime/7.29.2" "

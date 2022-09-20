@@ -17,11 +17,6 @@ type AuthCustomClaims struct {
 	jwt.StandardClaims
 }
 
-type AuthThirdPartyCustomClaims struct {
-	UserId string `json:"userId"`
-	jwt.StandardClaims
-}
-
 func GenerateToken(id uuid.UUID, name string, isUser bool) string {
 	claims := &AuthCustomClaims{
 		id,
@@ -44,7 +39,6 @@ func GenerateToken(id uuid.UUID, name string, isUser bool) string {
 }
 
 var jwtKey = []byte("iniRAHASIA")
-var jwtThirdParty = []byte("IOSDSDFJKAJHSHEHRKERHJREJKWH")
 
 func MiddlewareJWTAuthorization() gin.HandlerFunc {
 	return func(c *gin.Context) {
@@ -87,44 +81,6 @@ func MiddlewareJWTAuthorization() gin.HandlerFunc {
 		if !tkn.Valid {
 			c.JSON(http.StatusForbidden, gin.H{
 				"error": "Invalid token",
-			})
-			c.Abort()
-			return
-		}
-		c.Set("decoded", claims)
-		c.Next()
-	}
-	// ...
-
-}
-
-func ThirdPartyMiddleware() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		authorizationHeader := c.Request.Header.Get("x-access-token")
-
-		tokenString := authorizationHeader
-		claims := &AuthThirdPartyCustomClaims{}
-
-		tkn, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
-			return jwtThirdParty, nil
-		})
-		if err != nil {
-			if err == jwt.ErrSignatureInvalid {
-				c.JSON(http.StatusBadRequest, gin.H{
-					"error": "Invalid token key",
-				})
-				c.Abort()
-				return
-			}
-			c.JSON(http.StatusBadRequest, gin.H{
-				"error": "Invalid token decoded",
-			})
-			c.Abort()
-			return
-		}
-		if !tkn.Valid {
-			c.JSON(http.StatusForbidden, gin.H{
-				"error": "Invalid token not valid",
 			})
 			c.Abort()
 			return
